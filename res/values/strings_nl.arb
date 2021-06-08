@@ -475,6 +475,9 @@
 
   "outdated_electrum_wallet_description" : "Nieuwe Bitcoin-portefeuilles die in Cake zijn gemaakt, hebben nu een zaadje van 24 woorden. Het is verplicht dat u een nieuwe Bitcoin-portemonnee maakt en al uw geld overmaakt naar de nieuwe portemonnee van 24 woorden, en stopt met het gebruik van wallets met een seed van 12 woorden. Doe dit onmiddellijk om uw geld veilig te stellen.",
   "understand" : "Ik begrijp het",
+  
+  "address_detected" : "Adres gedetecteerd",
+  "address_from_domain" : "Je adres is van unstoppable domain ${domain}",
 
   "apk_update" : "APK-update",
 

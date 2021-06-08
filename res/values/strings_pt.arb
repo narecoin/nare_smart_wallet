@@ -475,6 +475,9 @@
 
   "outdated_electrum_wallet_description" : "As novas carteiras Bitcoin criadas no Cake agora têm uma semente de 24 palavras. É obrigatório que você crie uma nova carteira Bitcoin e transfira todos os seus fundos para a nova carteira de 24 palavras, e pare de usar carteiras com semente de 12 palavras. Faça isso imediatamente para garantir seus fundos.",
   "understand" : "Entendo",
+  
+  "address_detected" : "Endereço detectado",
+  "address_from_domain" : "Você obteve o endereço de unstoppable domain ${domain}",
 
   "apk_update" : "Atualização de APK",
 

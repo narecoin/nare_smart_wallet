@@ -475,6 +475,9 @@
 
   "outdated_electrum_wallet_description" : "Cakeで作成された新しいビットコインウォレットには、24ワードのシードがあります。 新しいビットコインウォレットを作成し、すべての資金を新しい24ワードのウォレットに転送し、12ワードのシードを持つウォレットの使用を停止することが必須です。 あなたの資金を確保するためにこれをすぐに行ってください。",
   "understand" : "わかります",
+  
+  "address_detected" : "アドレスが検出されました",
+  "address_from_domain" : "あなたはからアドレスを得ました unstoppable domain ${domain}",
 
   "apk_update" : "APKアップデート",
 
