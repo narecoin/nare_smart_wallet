@@ -52,6 +52,7 @@ abstract class MoneroWalletBase extends WalletBase<MoneroBalance,
           unlockedBalance:
               monero_wallet.getUnlockedBalance(accountIndex: account.id));
       walletAddresses.updateSubaddressList(accountIndex: account.id);
+      updateTransactions();
     });
   }
 
@@ -274,6 +275,7 @@ abstract class MoneroWalletBase extends WalletBase<MoneroBalance,
   List<MoneroTransactionInfo> _getAllTransactions(dynamic _) =>
       monero_transaction_history
           .getAllTransations()
+          .where((elem) => elem.subaddrAccount == walletAddresses.account.id)
           .map((row) => MoneroTransactionInfo.fromRow(row))
           .toList();
 

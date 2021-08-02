@@ -16,6 +16,8 @@ import 'package:cake_wallet/store/app_store.dart';
 
 part 'wallet_address_list_view_model.g.dart';
 
+const untitledSubaddress = 'Untitled subaddress';
+
 class WalletAddressListViewModel = WalletAddressListViewModelBase
     with _$WalletAddressListViewModel;
 
@@ -110,11 +112,14 @@ abstract class WalletAddressListViewModelBase with Store {
       addressList.addAll(wallet.walletAddresses.subaddressList.subaddresses
           .map((subaddress) {
         final isPrimary = subaddress == primaryAddress;
+        final name = (subaddress?.label?.isNotEmpty ?? false)
+        ? subaddress.label
+        : untitledSubaddress;
 
         return WalletAddressListItem(
             id: subaddress.id,
             isPrimary: isPrimary,
-            name: subaddress.label,
+            name: name,
             address: subaddress.address);
       }));
     }
