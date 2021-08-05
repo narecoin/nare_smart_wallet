@@ -66,21 +66,21 @@ abstract class DashboardViewModelBase with Store {
         //     onChanged: null),
       ],
       S.current.trades: [
-        FilterItem(
-            value: () => tradeFilterStore.displayXMRTO,
-            caption: 'XMR.TO',
-            onChanged: (value) => tradeFilterStore
-                .toggleDisplayExchange(ExchangeProviderDescription.xmrto)),
+        // FilterItem(
+        //    value: () => tradeFilterStore.displayXMRTO,
+        //    caption: 'XMR.TO',
+        //    onChanged: (value) => tradeFilterStore
+        //        .toggleDisplayExchange(ExchangeProviderDescription.xmrto)),
         FilterItem(
             value: () => tradeFilterStore.displayChangeNow,
             caption: 'Change.NOW',
             onChanged: (value) => tradeFilterStore
                 .toggleDisplayExchange(ExchangeProviderDescription.changeNow)),
-        FilterItem(
-            value: () => tradeFilterStore.displayMorphToken,
-            caption: 'MorphToken',
-            onChanged: (value) => tradeFilterStore
-                .toggleDisplayExchange(ExchangeProviderDescription.morphToken)),
+        // FilterItem(
+        //    value: () => tradeFilterStore.displayMorphToken,
+        //    caption: 'MorphToken',
+        //    onChanged: (value) => tradeFilterStore
+        //        .toggleDisplayExchange(ExchangeProviderDescription.morphToken)),
       ]
     };
 
@@ -273,22 +273,15 @@ abstract class DashboardViewModelBase with Store {
               transaction: transaction,
               balanceViewModel: balanceViewModel,
               settingsStore: appStore.settingsStore)));
+
+      connectMapToListWithTransform(
+          appStore.wallet.transactionHistory.transactions,
+          transactions,
+              (TransactionInfo val) => TransactionListItem(
+              transaction: val,
+              balanceViewModel: balanceViewModel,
+              settingsStore: appStore.settingsStore));
     }
-
-    connectMapToListWithTransform(
-        appStore.wallet.transactionHistory.transactions,
-        transactions,
-        (TransactionInfo val) => TransactionListItem(
-            transaction: val,
-            balanceViewModel: balanceViewModel,
-            settingsStore: appStore.settingsStore),
-        filter: (TransactionInfo tx) {
-      if (tx is MoneroTransactionInfo && wallet is MoneroWallet) {
-        return tx.accountIndex == wallet.walletAddresses.account.id;
-      }
-
-      return true;
-    });
   }
 
   @action
@@ -310,5 +303,20 @@ abstract class DashboardViewModelBase with Store {
             transaction: transaction,
             balanceViewModel: balanceViewModel,
             settingsStore: appStore.settingsStore)));
+
+    connectMapToListWithTransform(
+        appStore.wallet.transactionHistory.transactions,
+        transactions,
+            (TransactionInfo val) => TransactionListItem(
+            transaction: val,
+            balanceViewModel: balanceViewModel,
+            settingsStore: appStore.settingsStore),
+        filter: (TransactionInfo tx) {
+          if (tx is MoneroTransactionInfo) {
+            return tx.accountIndex == wallet.walletAddresses.account.id;
+          }
+
+          return true;
+        });
   }
 }
