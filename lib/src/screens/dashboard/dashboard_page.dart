@@ -1,6 +1,7 @@
 import 'package:cake_wallet/entities/wallet_type.dart';
 import 'package:cake_wallet/generated/i18n.dart';
 import 'package:cake_wallet/routes.dart';
+import 'package:cake_wallet/src/screens/dashboard/widgets/yat_alert/yat_popup.dart';
 import 'package:cake_wallet/src/widgets/alert_with_one_action.dart';
 import 'package:cake_wallet/themes/theme_base.dart';
 import 'package:cake_wallet/utils/show_pop_up.dart';
@@ -15,10 +16,8 @@ import 'package:cake_wallet/src/screens/dashboard/widgets/address_page.dart';
 import 'package:cake_wallet/src/screens/dashboard/widgets/transactions_page.dart';
 import 'package:cake_wallet/src/screens/dashboard/widgets/sync_indicator.dart';
 import 'package:cake_wallet/view_model/wallet_address_list/wallet_address_list_view_model.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class DashboardPage extends BasePage {
   DashboardPage({
@@ -145,7 +144,7 @@ class DashboardPage extends BasePage {
     ));
   }
 
-  void _setEffects(BuildContext context) {
+  void _setEffects(BuildContext context) async {
     if (_isEffectsInstalled) {
       return;
     }
@@ -154,6 +153,15 @@ class DashboardPage extends BasePage {
               walletViewModel: walletViewModel));
     pages.add(BalancePage(dashboardViewModel: walletViewModel));
     pages.add(TransactionsPage(dashboardViewModel: walletViewModel));
+
+    await Future<void>.delayed(Duration(seconds: 1));
+    await showPopUp<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return YatPopup(
+              dashboardViewModel: walletViewModel,
+              onClose: () => Navigator.of(context).pop());
+        });
 
     autorun((_) async {
       if (!walletViewModel.isOutdatedElectrumWallet) {

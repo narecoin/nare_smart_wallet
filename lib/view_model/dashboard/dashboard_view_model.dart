@@ -86,6 +86,9 @@ abstract class DashboardViewModelBase with Store {
     type = wallet.type;
     isOutdatedElectrumWallet =
         wallet.type == WalletType.bitcoin && wallet.seed.split(' ').length < 24;
+    isShowFirstYatIntroduction = false;
+    isShowSecondYatIntroduction = false;
+    isShowThirdYatIntroduction = false;
     final _wallet = wallet;
 
     if (_wallet is MoneroWallet) {
@@ -146,6 +149,15 @@ abstract class DashboardViewModelBase with Store {
 
   @observable
   String subname;
+
+  @observable
+  bool isShowFirstYatIntroduction;
+
+  @observable
+  bool isShowSecondYatIntroduction;
+
+  @observable
+  bool isShowThirdYatIntroduction;
 
   @computed
   String get address => wallet.walletAddresses.address;
