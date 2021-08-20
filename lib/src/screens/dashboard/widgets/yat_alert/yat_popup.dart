@@ -13,6 +13,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 class YatPopup extends StatelessWidget {
   YatPopup({this.dashboardViewModel, this.onClose});
 
+  static const durationInMilliseconds = 250;
+
   final DashboardViewModel dashboardViewModel;
   final VoidCallback onClose;
   final image = Image.asset('assets/images/emoji_popup.png');
@@ -30,6 +32,7 @@ class YatPopup extends StatelessWidget {
         ),
         SlideInUp(
           from: 420,
+          duration: Duration(milliseconds: durationInMilliseconds),
           child: ClipRRect(
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(24),
@@ -82,10 +85,10 @@ class YatPopup extends StatelessWidget {
                       child: Column(
                           children: [
                             Text(
-                                'Your wallet address is now emojified.',
+                                'Your wallet address can be emojified.',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  fontSize: 30,
+                                  fontSize: 24,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'Lato',
                                   color: Colors.black,
@@ -95,7 +98,7 @@ class YatPopup extends StatelessWidget {
                             Padding(
                                 padding: EdgeInsets.only(top: 20),
                                 child: Text(
-                                    'You can now send and receive crypto in Cake Wallet with your Yat - a short, emoji-based username',
+                                    'You can now send and receive crypto in Cake Wallet with your Yat - a short, emoji-based username. Manage Yats at any time on the settings screen',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontSize: 16,
@@ -124,6 +127,7 @@ class YatPopup extends StatelessWidget {
         Observer(builder: (_) => dashboardViewModel.isShowFirstYatIntroduction
             ? SlideInRight(
                 from: screenWidth,
+                duration: Duration(milliseconds: durationInMilliseconds),
                 child: FirstIntroduction(
                   onClose: onClose,
                   onNext: () => dashboardViewModel
@@ -134,6 +138,7 @@ class YatPopup extends StatelessWidget {
         Observer(builder: (_) => dashboardViewModel.isShowSecondYatIntroduction
             ? SlideInRight(
                 from: screenWidth,
+                duration: Duration(milliseconds: durationInMilliseconds),
                 child: SecondIntroduction(
                   onClose: onClose,
                   onNext: () => dashboardViewModel
@@ -144,6 +149,7 @@ class YatPopup extends StatelessWidget {
         Observer(builder: (_) => dashboardViewModel.isShowThirdYatIntroduction
             ? SlideInRight(
                 from: screenWidth,
+                duration: Duration(milliseconds: durationInMilliseconds),
                 child: ThirdIntroduction(
                   onClose: onClose,
                   onGet: () {},
