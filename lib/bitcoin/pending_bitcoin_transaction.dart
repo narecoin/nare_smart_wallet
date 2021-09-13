@@ -1,4 +1,3 @@
-import 'package:cake_wallet/bitcoin/bitcoin_commit_transaction_exception.dart';
 import 'package:flutter/foundation.dart';
 import 'package:bitcoin_flutter/bitcoin_flutter.dart' as bitcoin;
 import 'package:cake_wallet/core/pending_transaction.dart';
@@ -34,14 +33,12 @@ class PendingBitcoinTransaction with PendingTransaction {
 
   @override
   Future<void> commit() async {
-    final result =
+    try {
       await electrumClient.broadcastTransaction(transactionRaw: _tx.toHex());
-
-    if (result.isEmpty) {
-      throw BitcoinCommitTransactionException();
+      _listeners?.forEach((listener) => listener(transactionInfo()));
+    } catch (e) {
+      rethrow;
     }
-
-    _listeners?.forEach((listener) => listener(transactionInfo()));
   }
 
   void addListener(

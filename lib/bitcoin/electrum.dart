@@ -7,6 +7,7 @@ import 'package:cake_wallet/bitcoin/bitcoin_amount_format.dart';
 import 'package:cake_wallet/bitcoin/script_hash.dart';
 import 'package:flutter/foundation.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:cake_wallet/bitcoin/bitcoin_commit_transaction_exception.dart';
 
 String jsonrpcparams(List<Object> params) {
   final _params = params?.map((val) => '"${val.toString()}"')?.join(',');
@@ -243,7 +244,7 @@ class ElectrumClient {
           return result;
         }
 
-        return '';
+        throw BitcoinCommitTransactionException(result.toString());
       });
 
   Future<Map<String, dynamic>> getMerkle(
