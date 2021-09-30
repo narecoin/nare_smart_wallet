@@ -1,4 +1,4 @@
-# CakeWallet for Android and iOS
+# Nare Smart Wallet for Android and iOS
 
 ## Open Source Monero and Bitcoin Wallet
 
